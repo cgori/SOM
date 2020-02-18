@@ -1,8 +1,7 @@
-
 /*
  * DHTSensor.cpp
  *
- *  Created on: 17 Feb 2020
+ *  Created on: 18 Feb 2020
  *      Author: cmprharr
  */
 
@@ -14,7 +13,6 @@ DHT dht(DHTPIN, DHTTYPE);
 
 DHTSensor::DHTSensor() {
 	dht.begin();
-	readDHT();
 
 	// TODO Auto-generated constructor stub
 
@@ -23,9 +21,15 @@ DHTSensor::DHTSensor() {
 DHTSensor::~DHTSensor() {
 	// TODO Auto-generated destructor stub
 }
-void DHTSensor::GetHeat(float *heat){
+void DHTSensor::getHeat(float *heat){
 	for(int i =0; i < 500; i++){
 		heat[0] = this->humidity[i];
+	}
+
+}
+void DHTSensor::getHumidity(float *humidity){
+	for(int i =0; i < 500; i++){
+		humidity[0] = this->humidity[i];
 	}
 
 }
