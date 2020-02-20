@@ -1,14 +1,15 @@
 #include "Arduino.h"
 #include "System/ReadData/DHTSensor/DHTSensor.h"
+#include "System/System.h"
 #include <iostream>
 #include <vector>
 DHTSensor dht_;
+System sys;
 boolean timeDiff(unsigned long start, int specifiedDelay) {
 	return (millis() - start >= specifiedDelay);
 }
 
 void setup() {
-	//dht_.
 	Serial.begin(115200);
 
 }
@@ -18,7 +19,9 @@ void setup() {
 
 
 void loop() {
-	dht_.readDHT();
+
+	sys.readSensors();
+	/*dht_.readDHT();
 	std::vector<float> heat = dht_.getHeat();
 	std::vector<float> humid = dht_.getHumidity();
 	std::cout << "contains:";
@@ -29,7 +32,7 @@ void loop() {
 	std::cout << "contains:";
 	for (std::vector<float>::iterator i2 = humid.begin() ; i2 != humid.end(); ++i2)
 		std::cout << ' ' << *i2;
-	  std::cout << '\n';
+	  std::cout << '\n';*/
 
 
 }
