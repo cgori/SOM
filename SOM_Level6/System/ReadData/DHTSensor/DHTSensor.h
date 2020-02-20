@@ -7,19 +7,18 @@
 
 #ifndef SYSTEM_READDATA_DHTSENSOR_DHTSENSOR_H_
 #define SYSTEM_READDATA_DHTSENSOR_DHTSENSOR_H_
-
+#include <vector>
 class DHTSensor {
 public:
 	DHTSensor();
 	virtual ~DHTSensor();
-	void getHeat(float *heat);
-	void getHumidity(float *humidity);
+	std::vector<float> getHeat();
+	std::vector<float> getHumidity();
 	void readDHT();
 
 private:
-	int lastPos =0;
-	float humidity[500];
-	float temperature[500];
+	std::vector<float> heat;
+	std::vector<float> humid;
 };
 
 #endif /* SYSTEM_READDATA_DHTSENSOR_DHTSENSOR_H_ */

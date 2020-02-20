@@ -6,13 +6,18 @@
  */
 
 #include "PIRSensor.h"
-
+#include "Arduino.h"
 PIRSensor::PIRSensor() {
 	// TODO Auto-generated constructor stub
-
+	pinMode(PIRPin, INPUT);
 }
 
 PIRSensor::~PIRSensor() {
 	// TODO Auto-generated destructor stub
+}
+
+int PIRSensor::readPIR(){
+	int val = digitalRead(PIRPin);
+	return val;
 }
 

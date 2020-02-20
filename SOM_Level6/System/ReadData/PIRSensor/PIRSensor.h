@@ -12,6 +12,9 @@ class PIRSensor {
 public:
 	PIRSensor();
 	virtual ~PIRSensor();
+	int readPIR();
+private:
+	int PIRPin = 4;
 };
 
 #endif /* SYSTEM_READDATA_PIRSENSOR_PIRSENSOR_H_ */

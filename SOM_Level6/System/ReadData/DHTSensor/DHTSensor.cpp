@@ -10,9 +10,8 @@
 #define DHTTYPE DHT22
 const int DHTPIN = 14;
 DHT dht(DHTPIN, DHTTYPE);
-
 DHTSensor::DHTSensor() {
-	dht.begin();
+	dht.begin(55);
 
 	// TODO Auto-generated constructor stub
 
@@ -21,22 +20,15 @@ DHTSensor::DHTSensor() {
 DHTSensor::~DHTSensor() {
 	// TODO Auto-generated destructor stub
 }
-void DHTSensor::getHeat(float *heat){
-	for(int i =0; i < 500; i++){
-		heat[0] = this->humidity[i];
-	}
+std::vector<float> DHTSensor::getHeat(){
+	return this->heat;
 
 }
-void DHTSensor::getHumidity(float *humidity){
-	for(int i =0; i < 500; i++){
-		humidity[0] = this->humidity[i];
-	}
-
+std::vector<float> DHTSensor::getHumidity(){
+	return this->humid;
 }
 
 void DHTSensor::readDHT(){
-	this->humidity[lastPos] = dht.readHumidity();
-	this->temperature[lastPos++] = dht.readTemperature();
-
-
+	this->heat.push_back(dht.readHumidity());
+	this->humid.push_back(dht.readHumidity());
 }

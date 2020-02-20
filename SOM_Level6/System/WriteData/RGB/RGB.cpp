@@ -8,11 +8,24 @@
 #include "RGB.h"
 
 RGB::RGB() {
-	// TODO Auto-generated constructor stub
+	pinMode(greenPin, OUTPUT);
+	pinMode(redPin, OUTPUT);
 
 }
 
 RGB::~RGB() {
-	// TODO Auto-generated destructor stub
+}
+
+void RGB::turneRedLEDOn(){
+	digitalWrite(redPin, HIGH);
+}
+
+void RGB::turnGreenLEDOn(){
+	digitalWrite(greenPin, HIGH);
+}
+
+void RGB::LEDOFF(){
+	digitalWrite(redPin, LOW);
+	digitalWrite(greenPin, LOW);
 }
 
