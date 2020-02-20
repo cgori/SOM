@@ -7,14 +7,19 @@
 
 #ifndef SYSTEM_CHECKSTATES_CHECKSYSTEMSTATE_SYSTEMDETECTION_H_
 #define SYSTEM_CHECKSTATES_CHECKSYSTEMSTATE_SYSTEMDETECTION_H_
-#include "EnumStates/SystemState.h"
-
+#include "../EnumStates/SystemState.h"
+#include "Arduino.h"
+#include "../../WriteData/RGB/RGB.h"
 class SystemDetection {
 public:
 	SystemDetection();
 	virtual ~SystemDetection();
 	void checkStates(int heat, int humid);
+	void checkHeatState(int heat);
+	void checkHumidState(int humid);
+	void turnOnRGB();
 private:
+	RGB rgb;
 	SystemState sysState;
 	SystemState heatState;
 	SystemState humidState;

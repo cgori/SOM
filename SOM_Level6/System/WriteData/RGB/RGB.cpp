@@ -17,6 +17,7 @@ RGB::~RGB() {
 }
 
 void RGB::turneRedLEDOn(){
+
 	digitalWrite(redPin, HIGH);
 }
 

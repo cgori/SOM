@@ -20,7 +20,10 @@ public:
 	void writeData();
 	void checkStates();
 	bool timeDiff(unsigned long start, int specifiedDelay);
+	void serialToString();
+
 private:
+
 	DHTSensor dht_;
 	PresenceDetection presenceDetection;
 	SnoozeDetection snoozeDetection;
@@ -29,6 +32,8 @@ private:
 	std::vector<float> humid;
 	int DHTDelay = 1000;
 	unsigned long DHTLastChangeTime;
+	unsigned long serialOutPutLastChange;
+	const int serialOutPutDelay = 5000;
 };
 
 #endif /* SYSTEM_SYSTEM_H_ */

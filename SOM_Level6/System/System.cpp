@@ -27,19 +27,29 @@ void System::readSensors() {
 }
 
 void System::writeData() {
-
+	if (timeDiff(this->serialOutPutLastChange, this->serialOutPutDelay)) {
+		this->serialOutPutLastChange = millis();
+		this->heat = this->dht_.getHeat();
+		this->humid = this->dht_.getHumidity();
+		serialToString();
+	}
 }
 
 void System::checkStates() {
-	int y = this->heat.size();
-	int x = this->humid.size();
-	if ((!this->heat.empty() && this->heat.back()==y) && (!this->humid.empty() && this->humid.back()==x))
-	{
-		this->sysDetection.checkStates(this->heat.back(),this->humid.back());
+	if (!this->heat.empty() && !this->humid.empty()) {
+		this->sysDetection.checkStates(this->heat.back(), this->humid.back());
 	}
-
 }
-boolean System::timeDiff(unsigned long start, int specifiedDelay) {
+
+bool System::timeDiff(unsigned long start, int specifiedDelay) {
 	return (millis() - start >= specifiedDelay);
 }
+
+void System::serialToString() {
+	Serial.print("Current heat:");
+	Serial.print(this->heat.back());
+	Serial.print(" Current Humidity:");
+	Serial.println(this->humid.back());
+}
+
 

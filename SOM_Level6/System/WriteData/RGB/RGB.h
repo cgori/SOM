@@ -18,6 +18,6 @@ public:
 
 private:
 	int greenPin = 12;
-	int redPin = 14;
+	int redPin = 27;
 };
 #endif /* SYSTEM_WRITEDATA_RGB_RGB_H_ */
