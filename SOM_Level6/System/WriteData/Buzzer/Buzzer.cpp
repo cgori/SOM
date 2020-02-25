@@ -18,7 +18,7 @@ Buzzer::~Buzzer() {
 }
 
 void Buzzer::turnBuzzerON(){
-	ledcWriteTone(channel, 2000);
+	ledcWriteTone(channel, 100);
 }
 void Buzzer::turnBuzzerOFF(){
 	ledcWriteTone(channel, 0);

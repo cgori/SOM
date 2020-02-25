@@ -11,7 +11,9 @@ boolean timeDiff(unsigned long start, int specifiedDelay) {
 
 void setup() {
 	Serial.begin(115200);
+
 }
+
 
 
 
@@ -21,6 +23,8 @@ void loop() {
 	sys.readSensors();
 	sys.checkStates();
 	sys.writeData();
+
+
 	/*dht_.readDHT();
 	std::vector<float> heat = dht_.getHeat();*/
 	/*for (std::vector<float>::iterator i1 = heat.begin() ; i1 != heat.end(); ++i1)

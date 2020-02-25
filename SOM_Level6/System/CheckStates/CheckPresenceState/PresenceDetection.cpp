@@ -7,12 +7,35 @@
 
 #include "PresenceDetection.h"
 
+
+
 PresenceDetection::PresenceDetection() {
-	// TODO Auto-generated constructor stub
+
 
 }
 
 PresenceDetection::~PresenceDetection() {
 	// TODO Auto-generated destructor stub
 }
+
+PresenceState PresenceDetection::checkState(){
+
+	if(pirsensor.readPIR() == HIGH ){
+		Serial.println("Someone detected 10min delay");
+		this->pirTime = millis();
+		return PresenceState::DETECTED;
+	}
+	else{
+		return PresenceState::EMPTY;
+	}
+
+}
+
+long PresenceDetection::getTime(){
+	return this->pirTime;
+}
+
+
+
+
 

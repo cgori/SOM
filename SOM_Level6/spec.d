@@ -1,2 +1,2 @@
 spec.o: \
- M:/Workspace/.metadata/.plugins/org.eclipse.cdt.managedbuilder.core/spec.C
+ C:/Users/cmpcgori/Documents/sloeber-workspace/.metadata/.plugins/org.eclipse.cdt.managedbuilder.core/spec.C

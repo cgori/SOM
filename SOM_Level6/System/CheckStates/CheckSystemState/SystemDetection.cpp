@@ -67,3 +67,8 @@ void SystemDetection::checkHumidState(int humid) {
 		this->humidState = SystemState::RED;
 	}
 }
+
+SystemState SystemDetection::getSystemState(){
+	return this->sysState;
+}
+

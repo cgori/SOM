@@ -18,6 +18,7 @@ public:
 	void checkHeatState(int heat);
 	void checkHumidState(int humid);
 	void turnOnRGB();
+	SystemState getSystemState();
 private:
 	RGB rgb;
 	SystemState sysState;

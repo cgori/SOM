@@ -9,7 +9,7 @@
 
 Button::Button() {
 	pinMode(buttonPin, INPUT);
-
+	this->lastChange = 0;
 }
 
 Button::~Button() {
@@ -19,5 +19,20 @@ Button::~Button() {
 int Button::checkButtonState(){
 	int state = digitalRead(buttonPin);
 	return state;
+}
+
+ButtonState Button::checkState(){
+	ButtonState now = ButtonState::OFF;
+	if(digitalRead(buttonPin)){
+		now = ButtonState::ON;
+	}
+
+	if(now != bouncedState){
+		lastChange = millis();
+		bouncedState = now;
+	}
+	if((millis() - lastChange) >= BOUNCE_DELAY_MS)
+		debouncedState = now;
+	return debouncedState;
 }
 
