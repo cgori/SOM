@@ -31,13 +31,13 @@ void System::readButton(){
 
 
 void System::alarm(){
-	if(this->pirState == PresenceState::DETECTED && sysDetection.getSystemState() == SystemState::RED && this->timeDiff(this->lastChangeSystem, this->criticalDelay)){
+	if(this->pirState == PresenceState::DETECTED && sysDetection.getSystemState() == SystemState::RED && this->timeDiff(this->lastChangeSystem, this->criticalDelay) && this->snoozeState == SnoozeState::RUNNING){
 		this->alarmOn = true;
 		buzzer.turnBuzzerON();
 		lastChangeSystem = millis();
 
 
-	}else if(this->pirState == PresenceState::DETECTED && sysDetection.getSystemState() == SystemState::AMBER && this->timeDiff(this->lastChangeSystem, this->amberDelay)){
+	}else if(this->pirState == PresenceState::DETECTED && sysDetection.getSystemState() == SystemState::AMBER && this->timeDiff(this->lastChangeSystem, this->amberDelay) && this->snoozeState == SnoozeState::RUNNING){
 		Serial.println("Amber state delay 30s");
 		this->alarmOn = true;
 		buzzer.turnBuzzerON();
@@ -56,6 +56,7 @@ void System::checkStates() {
 		this->sysDetection.checkStates(this->heat.back(), this->humid.back());
 	}
 	checkPresence();
+	checkSnooze();
 
 }
 
@@ -81,6 +82,14 @@ void System::serialToString() {
 }
 
 // PIRSensor
+void System::checkSnooze(){
+	if (this->snoozeState == SnoozeState::SLEEPING
+				&& timeDiff(snoozeDetection.getTime(), this->snoozeDelay)) {
+	}else if (this->snoozeState == SnoozeState::RUNNING) {
+		this->snoozeState = snoozeDetection.checkSnooze();
+	}
+}
+
 
 void System::checkPresence() {
 	if (this->pirState == PresenceState::DETECTED

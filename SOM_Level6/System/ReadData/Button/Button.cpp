@@ -16,11 +16,6 @@ Button::~Button() {
 	// TODO Auto-generated destructor stub
 }
 
-int Button::checkButtonState(){
-	int state = digitalRead(buttonPin);
-	return state;
-}
-
 ButtonState Button::checkState(){
 	ButtonState now = ButtonState::OFF;
 	if(digitalRead(buttonPin)){

@@ -13,6 +13,7 @@
 #include "CheckStates/CheckPresenceState/PresenceDetection.h"
 #include "CheckStates/CheckSnoozeState/SnoozeDetection.h"
 #include "WriteData/Buzzer/Buzzer.h"
+#include "CheckStates/EnumStates/SnoozeState.h"
 #include "ReadData/Button/Button.h"
 
 class System {
@@ -24,8 +25,10 @@ public:
 	void checkStates();
 	bool timeDiff(unsigned long start, int specifiedDelay);
 	void serialToString();
+	void checkSnooze();
 
 private:
+	SnoozeState snoozeState = SnoozeState:: RUNNING;
 	PresenceDetection presenceDetection;
 	SnoozeDetection snoozeDetection;
 	SystemDetection sysDetection;
@@ -48,6 +51,7 @@ private:
 	DHTSensor dht_;
 	PIRSensor pir;
 	Buzzer buzzer;
+	long snoozeDelay = 120000;
 	bool alarmOn = false;
 	long alarmDelay = 1000;
 	unsigned long DHTLastChangeTime;

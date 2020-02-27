@@ -5,18 +5,10 @@
 #include <vector>
 DHTSensor dht_;
 System sys;
-boolean timeDiff(unsigned long start, int specifiedDelay) {
-	return (millis() - start >= specifiedDelay);
-}
-
 void setup() {
 	Serial.begin(115200);
 
 }
-
-
-
-
 
 
 void loop() {

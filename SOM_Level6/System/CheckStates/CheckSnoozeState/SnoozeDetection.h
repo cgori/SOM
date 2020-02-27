@@ -14,11 +14,12 @@ class SnoozeDetection {
 public:
 	SnoozeDetection();
 	virtual ~SnoozeDetection();
-private:
+	long getTime();
 	SnoozeState checkSnooze();
+private:
+	unsigned long time;
 	SnoozeState snoozeState = SnoozeState::RUNNING;
 	Button btn;
-
 };
 
 #endif /* SYSTEM_CHECKSTATES_CHECKSNOOZESTATE_SNOOZEDETECTION_H_ */
