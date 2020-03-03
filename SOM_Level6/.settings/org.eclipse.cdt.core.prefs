@@ -535,7 +535,7 @@ environment/project/io.sloeber.core.toolChain.release.1168464685/JANTJE.BOARD_NA
 environment/project/io.sloeber.core.toolChain.release.1168464685/JANTJE.BOARD_NAME/value=ESPea32
 environment/project/io.sloeber.core.toolChain.release.1168464685/JANTJE.COM_PORT/delimiter=;
 environment/project/io.sloeber.core.toolChain.release.1168464685/JANTJE.COM_PORT/operation=replace
-environment/project/io.sloeber.core.toolChain.release.1168464685/JANTJE.COM_PORT/value=COM6
+environment/project/io.sloeber.core.toolChain.release.1168464685/JANTJE.COM_PORT/value=COM4
 environment/project/io.sloeber.core.toolChain.release.1168464685/JANTJE.ECLIPSE_LOCATION/delimiter=;
 environment/project/io.sloeber.core.toolChain.release.1168464685/JANTJE.ECLIPSE_LOCATION/operation=replace
 environment/project/io.sloeber.core.toolChain.release.1168464685/JANTJE.ECLIPSE_LOCATION/value=C\:\\apps\\sloeber\\
