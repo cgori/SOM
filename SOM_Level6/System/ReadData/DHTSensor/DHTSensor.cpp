@@ -7,11 +7,11 @@
 
 #include "DHTSensor.h"
 #include <DHT.h>
-#define DHTTYPE DHT22
+#define DHTTYPE DHT11
 const int DHTPIN = 14;
 DHT dht(DHTPIN, DHTTYPE);
 DHTSensor::DHTSensor() {
-	dht.begin(55);
+	dht.begin();
 	// TODO Auto-generated constructor stub
 
 }
@@ -30,10 +30,9 @@ std::vector<float> DHTSensor::getHumidity(){
 bool DHTSensor::readDHT(){
 	if(isnan(dht.readHumidity())){
 		Serial.println("DHT System not working");
-		return false;
 		}else{
 			this->heat.push_back(dht.readTemperature());
 			this->humid.push_back(dht.readHumidity());
-			return true;
 		}
+	return true;
 }

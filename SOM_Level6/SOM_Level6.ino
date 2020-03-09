@@ -3,12 +3,21 @@
 #include "System/System.h"
 #include <iostream>
 #include <vector>
+#include <SD.h>
 DHTSensor dht_;
 System sys;
+#define CS_pin = 15;
+
 void setup() {
-	Serial.begin(115200);
-
-
+	SD.begin(115200);
+	File file = SD.open("data.txt", FILE_WRITE);
+	file.println("The file is prepared");
+	file.close();
+	SD.end();
+//	delay(200);
+//	    while(! SD.begin(15)){
+//	    }
+//	    Serial.println("SD OK");
 }
 
 

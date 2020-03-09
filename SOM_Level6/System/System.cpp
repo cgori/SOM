@@ -24,32 +24,36 @@ void System::readSensors() {
 	}
 
 }
-void System::readButton(){
+void System::readButton() {
 	btn.checkButtonState();
 
 }
 
-
-void System::alarm(){
-	if((this->pirState == PresenceState::DETECTED && sysDetection.getSystemState() == SystemState::RED && this->timeDiff(this->lastChangeSystem, this->criticalDelay) && this->snoozeState == SnoozeState::RUNNING) || this->DHT_State == false){
+void System::alarm() {
+	if ((this->pirState == PresenceState::DETECTED
+			&& sysDetection.getSystemState() == SystemState::RED
+			&& this->timeDiff(this->lastChangeSystem, this->criticalDelay)
+			&& this->snoozeState == SnoozeState::RUNNING && this->DHT_State == true)
+			|| this->DHT_State == false) {
 		this->alarmOn = true;
 		buzzer.turnBuzzerON();
 		lastChangeSystem = millis();
 
-
-	}else if(this->pirState == PresenceState::DETECTED && sysDetection.getSystemState() == SystemState::AMBER && this->timeDiff(this->lastChangeSystem, this->amberDelay) && this->snoozeState == SnoozeState::RUNNING){
+	} else if (this->pirState == PresenceState::DETECTED
+			&& sysDetection.getSystemState() == SystemState::AMBER
+			&& this->timeDiff(this->lastChangeSystem, this->amberDelay)
+			&& this->snoozeState == SnoozeState::RUNNING) {
 		Serial.println("Amber state delay 30s");
 		this->alarmOn = true;
 		buzzer.turnBuzzerON();
 		lastChangeSystem = millis();
 	}
-	if(this->alarmOn && this->timeDiff(this->lastChangeSystem, this->alarmDelay)){
+	if (this->alarmOn
+			&& this->timeDiff(this->lastChangeSystem, this->alarmDelay)) {
 		buzzer.turnBuzzerOFF();
 	}
 
 }
-
-
 
 void System::checkStates() {
 	if (!this->heat.empty() && !this->humid.empty()) {
@@ -68,6 +72,7 @@ void System::writeData() {
 		serialToString();
 	}
 	alarm();
+	//writeSD();
 }
 
 bool System::timeDiff(unsigned long start, int specifiedDelay) {
@@ -75,21 +80,23 @@ bool System::timeDiff(unsigned long start, int specifiedDelay) {
 }
 
 void System::serialToString() {
-	Serial.print("Current heat:");
-	Serial.print(this->heat.back());
-	Serial.print(" Current Humidity:");
-	Serial.println(this->humid.back());
+	if (this->heat.size() > 0) {
+		Serial.print("Current heat:");
+		Serial.print(this->heat.back());
+		Serial.print(" Current Humidity:");
+		Serial.println(this->humid.back());
+	} else
+		Serial.println("NO RECORDS YET");
 }
 
 // PIRSensor
-void System::checkSnooze(){
+void System::checkSnooze() {
 	if (this->snoozeState == SnoozeState::SLEEPING
-				&& timeDiff(snoozeDetection.getTime(), this->snoozeDelay)) {
-	}else if (this->snoozeState == SnoozeState::RUNNING) {
+			&& timeDiff(snoozeDetection.getTime(), this->snoozeDelay)) {
+	} else if (this->snoozeState == SnoozeState::RUNNING) {
 		this->snoozeState = snoozeDetection.checkSnooze();
 	}
 }
-
 
 void System::checkPresence() {
 	if (this->pirState == PresenceState::DETECTED
@@ -99,5 +106,18 @@ void System::checkPresence() {
 	} else if (this->pirState == PresenceState::EMPTY) {
 		this->pirState = presenceDetection.checkState();
 	}
+}
+
+bool System::writeSD(){
+	if(timeDiff(this->lastWriteData, this->SDWriteDelay)){
+		this->sd.WritingSD(dht_.getHeat(),dht_.getHumidity());
+		return true;
+	}
+	return false;
+
+}
+
+void System::readSD(){
+
 }
 

@@ -21,7 +21,6 @@ PresenceDetection::~PresenceDetection() {
 PresenceState PresenceDetection::checkState(){
 
 	if(pirsensor.readPIR() == HIGH ){
-		Serial.println("Someone detected 10min delay");
 		this->pirTime = millis();
 		return PresenceState::DETECTED;
 	}

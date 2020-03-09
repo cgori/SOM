@@ -15,6 +15,7 @@
 #include "WriteData/Buzzer/Buzzer.h"
 #include "CheckStates/EnumStates/SnoozeState.h"
 #include "ReadData/Button/Button.h"
+#include "WriteData/WriteToSD/WriteToSD.h"
 
 class System {
 public:
@@ -49,6 +50,7 @@ private:
 
 	// Component objects
 	DHTSensor dht_;
+	WriteToSD sd;
 	PIRSensor pir;
 	Buzzer buzzer;
 	long snoozeDelay = 120000;
@@ -58,11 +60,14 @@ private:
 	long criticalDelay = 5000;
 	const long amberDelay = 30000;
 	unsigned long lastChangeSystem;
-	unsigned buzzerDelay = 1000;
-
+	const long buzzerDelay = 1000;
+	unsigned lastWriteData;
+	const long SDWriteDelay = 5000;
 	unsigned long serialOutPutLastChange;
 	const int serialOutPutDelay = 5000;
 	void checkPresence();
+	bool writeSD();
+	void readSD();
 };
 
 #endif /* SYSTEM_SYSTEM_H_ */
