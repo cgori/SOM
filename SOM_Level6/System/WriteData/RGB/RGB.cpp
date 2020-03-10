@@ -16,16 +16,16 @@ RGB::RGB() {
 RGB::~RGB() {
 }
 
-void RGB::turneRedLEDOn() {
+void RGB::turneRedLEDOn(){
 
 	digitalWrite(redPin, HIGH);
 }
 
-void RGB::turnGreenLEDOn() {
+void RGB::turnGreenLEDOn(){
 	digitalWrite(greenPin, HIGH);
 }
 
-void RGB::LEDOFF() {
+void RGB::LEDOFF(){
 	digitalWrite(redPin, LOW);
 	digitalWrite(greenPin, LOW);
 }
