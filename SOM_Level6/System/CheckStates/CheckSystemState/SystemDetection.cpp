@@ -16,7 +16,10 @@ SystemDetection::~SystemDetection() {
 	// TODO Auto-generated destructor stub
 }
 
-void SystemDetection::checkStates(int heat, int humid) {
+/*
+ * Updates the system states based on the humidity state and heat state
+ */
+void SystemDetection::checkStates(double heat, double humid) {
 
 	SystemState TempState = this->sysState;
 	checkHeatState(heat);
@@ -47,7 +50,10 @@ void SystemDetection::checkStates(int heat, int humid) {
 	}
 }
 
-void SystemDetection::checkHeatState(int heat) {
+/*
+ * @params int heat
+ */
+void SystemDetection::checkHeatState(double heat) {
 	if (this->greenLow <= heat && this->greenHigh >= heat) {
 		this->heatState = SystemState::GREEN;
 
@@ -57,7 +63,7 @@ void SystemDetection::checkHeatState(int heat) {
 		this->heatState = SystemState::RED;
 	}
 }
-void SystemDetection::checkHumidState(int humid) {
+void SystemDetection::checkHumidState(double humid) {
 	if (this->humidGreenLow <= humid && this->humidGreenHigh >= humid) {
 		this->humidState = SystemState::GREEN;
 

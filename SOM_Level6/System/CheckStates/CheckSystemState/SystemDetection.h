@@ -14,9 +14,9 @@ class SystemDetection {
 public:
 	SystemDetection();
 	virtual ~SystemDetection();
-	void checkStates(int heat, int humid);
-	void checkHeatState(int heat);
-	void checkHumidState(int humid);
+	void checkStates(double heat, double humid);
+	void checkHeatState(double heat);
+	void checkHumidState(double humid);
 	void turnOnRGB();
 	SystemState getSystemState();
 private:
@@ -24,14 +24,14 @@ private:
 	SystemState sysState;
 	SystemState heatState;
 	SystemState humidState;
-	const int greenLow= 18;
-	const int greenHigh=23;
-	const int amberLow = 16;
-	const int amberHigh = 27;
-	const int humidGreenLow = 35;
-	const int humidGreenHigh = 60;
-	const int humidAmberLow=25;
-	const int humidAmberhigh=75;
+	const double greenLow= 18;
+	const double greenHigh=23;
+	const double amberLow = 16;
+	const double amberHigh = 27;
+	const double humidGreenLow = 35;
+	const double humidGreenHigh = 60;
+	const double humidAmberLow=25;
+	const double humidAmberhigh=75;
 };
 
 #endif /* SYSTEM_CHECKSTATES_CHECKSYSTEMSTATE_SYSTEMDETECTION_H_ */

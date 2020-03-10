@@ -8,14 +8,18 @@
 #include "SnoozeDetection.h"
 
 SnoozeDetection::SnoozeDetection() {
-	// TODO Auto-generated constructor stub
+	// TODO constructor stub
 
 }
 
 SnoozeDetection::~SnoozeDetection() {
-	// TODO Auto-generated destructor stub
+	// TODO destructor stub
 }
 
+/*
+ * Gets the state being sleeping or running.
+ *@return SnoozeState
+ */
 SnoozeState SnoozeDetection::checkSnooze(){
 	if(this->btn.checkState() == ButtonState::ON){
 		Serial.println("Button pressed 2min sleep");
