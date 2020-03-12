@@ -14,7 +14,7 @@ public:
 	virtual ~DHTSensor();
 	std::vector<float> getHeat();
 	std::vector<float> getHumidity();
-	bool readDHT();
+	void readDHT();
 
 private:
 	std::vector<float> heat;

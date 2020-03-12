@@ -18,7 +18,7 @@ System::~System() {
 void System::readSensors() {
 	if (timeDiff(this->DHTLastChangeTime, this->DHTDelay)) {
 		this->DHTLastChangeTime = millis();
-		this->DHT_State = this->dht_.readDHT();
+		this->dht_.readDHT();
 		this->heat = this->dht_.getHeat();
 		this->humid = this->dht_.getHumidity();
 	}
@@ -31,7 +31,7 @@ void System::readButton(){
 
 
 void System::alarm(){
-	if((this->pirState == PresenceState::DETECTED && sysDetection.getSystemState() == SystemState::RED && this->timeDiff(this->lastChangeSystem, this->criticalDelay) && this->snoozeState == SnoozeState::RUNNING) || this->DHT_State == false){
+	if(this->pirState == PresenceState::DETECTED && sysDetection.getSystemState() == SystemState::RED && this->timeDiff(this->lastChangeSystem, this->criticalDelay) && this->snoozeState == SnoozeState::RUNNING){
 		this->alarmOn = true;
 		buzzer.turnBuzzerON();
 		lastChangeSystem = millis();

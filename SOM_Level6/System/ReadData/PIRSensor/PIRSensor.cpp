@@ -18,7 +18,6 @@ PIRSensor::~PIRSensor() {
 
 int PIRSensor::readPIR(){
 	int val = digitalRead(PIRPin);
-	//Serial.print(digitalRead(PIRPin));
 	return val;
 }
 

@@ -27,13 +27,11 @@ std::vector<float> DHTSensor::getHumidity(){
 	return this->humid;
 }
 
-bool DHTSensor::readDHT(){
+void DHTSensor::readDHT(){
 	if(isnan(dht.readHumidity())){
-		Serial.println("DHT System not working");
-		return false;
+		Serial.println("not working");
 		}else{
 			this->heat.push_back(dht.readTemperature());
 			this->humid.push_back(dht.readHumidity());
-			return true;
 		}
 }

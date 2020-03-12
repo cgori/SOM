@@ -36,11 +36,11 @@ private:
 	std::vector<float> humid;
 	// Component delays
 	int DHTDelay = 1000;
-	int PIRDelay = 500;
+	int PIRDelay = 600000;
 	int BuzzerDelay = 120000;
 	void alarm();
 	void readButton();
-	bool DHT_State = true;
+
 	Button btn;
 
 	//States
