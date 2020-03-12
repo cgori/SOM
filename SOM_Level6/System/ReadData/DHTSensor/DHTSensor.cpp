@@ -35,3 +35,7 @@ void DHTSensor::readDHT(){
 			this->humid.push_back(dht.readHumidity());
 		}
 }
+
+
+
+

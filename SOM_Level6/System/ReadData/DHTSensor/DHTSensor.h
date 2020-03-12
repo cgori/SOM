@@ -15,10 +15,15 @@ public:
 	std::vector<float> getHeat();
 	std::vector<float> getHumidity();
 	void readDHT();
+	long getTime();
+
+
 
 private:
 	std::vector<float> heat;
 	std::vector<float> humid;
+	unsigned long time;
+
 };
 
 #endif /* SYSTEM_READDATA_DHTSENSOR_DHTSENSOR_H_ */

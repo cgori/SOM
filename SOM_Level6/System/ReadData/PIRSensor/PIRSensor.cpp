@@ -21,3 +21,21 @@ int PIRSensor::readPIR(){
 	return val;
 }
 
+PresenceState PIRSensor::checkState(){
+
+	if(this->readPIR() == HIGH ){
+		Serial.println("Someone detected 10min delay");
+		this->pirTime = millis();
+		return PresenceState::DETECTED;
+	}
+	else{
+		return PresenceState::EMPTY;
+	}
+
+}
+
+long PIRSensor::getTime(){
+	return this->pirTime;
+}
+
+

@@ -84,20 +84,20 @@ void System::serialToString() {
 // PIRSensor
 void System::checkSnooze(){
 	if (this->snoozeState == SnoozeState::SLEEPING
-				&& timeDiff(snoozeDetection.getTime(), this->snoozeDelay)) {
+				&& timeDiff(buzzer.getTime(), this->snoozeDelay)) {
 	}else if (this->snoozeState == SnoozeState::RUNNING) {
-		this->snoozeState = snoozeDetection.checkSnooze();
+		this->snoozeState = buzzer.checkSnooze();
 	}
 }
 
 
 void System::checkPresence() {
 	if (this->pirState == PresenceState::DETECTED
-			&& timeDiff(presenceDetection.getTime(), this->PIRDelay)) {
-		this->pirState = presenceDetection.checkState();
+			&& timeDiff(pir.getTime(), this->PIRDelay)) {
+		this->pirState = pir.checkState();
 
 	} else if (this->pirState == PresenceState::EMPTY) {
-		this->pirState = presenceDetection.checkState();
+		this->pirState = pir.checkState();
 	}
 }
 

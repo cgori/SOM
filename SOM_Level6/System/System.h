@@ -10,11 +10,11 @@
 #include "ReadData/DHTSensor/DHTSensor.h"
 #include "Arduino.h"
 #include "CheckStates/CheckSystemState/SystemDetection.h"
-#include "CheckStates/CheckPresenceState/PresenceDetection.h"
-#include "CheckStates/CheckSnoozeState/SnoozeDetection.h"
+#include "ReadData/PIRSensor/PresenceState.h"
 #include "WriteData/Buzzer/Buzzer.h"
 #include "CheckStates/EnumStates/SnoozeState.h"
 #include "ReadData/Button/Button.h"
+#include "ReadData/PIRSensor/PIRSensor.h"
 
 class System {
 public:
@@ -29,8 +29,6 @@ public:
 
 private:
 	SnoozeState snoozeState = SnoozeState:: RUNNING;
-	PresenceDetection presenceDetection;
-	SnoozeDetection snoozeDetection;
 	SystemDetection sysDetection;
 	std::vector<float> heat;
 	std::vector<float> humid;
