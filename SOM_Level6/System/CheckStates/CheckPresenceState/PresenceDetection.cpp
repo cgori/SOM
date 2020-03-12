@@ -18,13 +18,8 @@ PresenceDetection::~PresenceDetection() {
 	// TODO Auto-generated destructor stub
 }
 
-
 PresenceState PresenceDetection::checkState(){
 
-	/**
-	 * Returns the state, being detected or empty.
-	 * @return PresenceState
-	 */
 	if(pirsensor.readPIR() == HIGH ){
 		Serial.println("Someone detected 10min delay");
 		this->pirTime = millis();
@@ -35,9 +30,7 @@ PresenceState PresenceDetection::checkState(){
 	}
 
 }
-/*
- * @return pirTime
- */
+
 long PresenceDetection::getTime(){
 	return this->pirTime;
 }
