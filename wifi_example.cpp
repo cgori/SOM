@@ -2,8 +2,12 @@
 #include "ArduinoJson.h"
 #include <HTTPClient.h>
 #include <Arduino.h>
-const char *ssid = "";
-const char *password = "";
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+const char *ssid = ""; // change this
+const char *password = ""; // change this
 String serverName = "http://51.38.71.106/api/DHT";
 String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVlYTFhOTdlYTc2ZGEwNDUyNDg0MjVlNiIsInVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IjA5NzliZjZjMTE3NjI2ZmJiOGJlMjFmZjY1OTBkMjIzIiwiX192IjowfSwiaWF0IjoxNTg3NjUzMTEwLCJleHAiOjE2NzQwNTMxMTB9.M--ry9qOxbbyO48p17eWa3VKjNi92qLwNXrtkYMWCqU";
 //Your Domain name with URL path or IP address with path
@@ -42,26 +46,39 @@ void loop()
     //Check WiFi connection status
     if (WiFi.status() == WL_CONNECTED)
     {
-      // Create the payload
-      int vector_size = 5;
+
+      std::vector<int> humidity;
+      std::vector<int> temperature;
+
+      // generating example data - delete this 
+      std::srand(std::time(nullptr));
+      for (int i = 0; i < 30; i++)
+      {
+        int x = std::rand();
+        humidity.push_back(x);
+        int y = std::rand();
+        temperature.push_back(y + x / 5);
+      }
+      // generate document
       StaticJsonDocument<200> doc;
-      JsonArray data = doc.createNestedArray("data");
-      for (int i = 0; i < vector_size; i++)
+      JsonArray data = doc.createNestedArray("results");
+      for (int i = 0; i < temperature.size(); i++)
       {
         JsonObject nested = data.createNestedObject();
-        nested["humidity"] = "insert humidity data";
-        nested["temperature"] = "insert temperature data";
+        nested["humidity"] = humidity[i];
+        nested["temperature"] = temperature[i];
       }
-
-      serializeJsonPretty(doc, Serial);
-
+      String x;
+      serializeJsonPretty(doc, x);
+      // create http client
       HTTPClient http;
-      // Your Domain name with URL path or IP address with path
       http.begin(serverName);
+      http.addHeader("Content-Type", "application/json");
       http.addHeader("token", token, false, false);
-      // Send HTTP GET request
-      int httpResponseCode = http.POST("POST STRING DATA HERE");
+      // Send HTTP POST request
+      int httpResponseCode = http.POST(x);
 
+      // Handle response data
       if (httpResponseCode > 0)
       {
         Serial.print("HTTP Response code: ");
