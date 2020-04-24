@@ -25,7 +25,7 @@ private:
 	SystemState heatState;
 	SystemState humidState;
 	const int greenLow= 18;
-	const int greenHigh=23;
+	const int greenHigh=25;
 	const int amberLow = 16;
 	const int amberHigh = 27;
 	const int humidGreenLow = 35;

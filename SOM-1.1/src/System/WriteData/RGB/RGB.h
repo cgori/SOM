@@ -17,7 +17,7 @@ public:
 	void LEDOFF();
 
 private:
-	int greenPin = 12;
+	int greenPin = 32;
 	int redPin = 27;
 };
 #endif /* SYSTEM_WRITEDATA_RGB_RGB_H_ */

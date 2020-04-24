@@ -68,6 +68,7 @@ void System::writeData() {
 		serialToString();
 	}
 	alarm();
+	//sendHTTPost();
 }
 
 bool System::timeDiff(unsigned long start, int specifiedDelay) {
@@ -99,5 +100,21 @@ void System::checkPresence() {
 	} else if (this->pirState == PresenceState::EMPTY) {
 		this->pirState = presenceDetection.checkState();
 	}
+}
+
+void System::sendHTTPost() {
+	if(timeDiff(wifi.getTime(), this->wifiDelay)){
+		wifi.sendData(dht_.getHeat(), dht_.getHumidity());
+	}
+
+
+}
+
+void System::saveSD() {
+	if(timeDiff(sd.getTime(), this->sdDelay)){
+		wifi.sendData(dht_.getHeat(), dht_.getHumidity());
+	}
+
+
 }
 

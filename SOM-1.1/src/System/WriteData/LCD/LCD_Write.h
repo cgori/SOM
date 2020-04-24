@@ -11,6 +11,10 @@
 #include <TFT_eSPI.h> // Hardware-specific library
 #include <SPI.h>
 class LCD_Write {
+// ==============================================================
+// EDIT USER_SETUP.H FOR TFT_eSPI TO SET CORRECT PINS AND MODULES
+// ==============================================================
+
 public:
     LCD_Write();
 	virtual ~LCD_Write();

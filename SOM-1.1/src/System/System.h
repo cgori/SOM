@@ -15,7 +15,9 @@
 #include "WriteData/Buzzer/Buzzer.h"
 #include "CheckStates/EnumStates/SnoozeState.h"
 #include "ReadData/Button/Button.h"
-
+#include "System/WriteData/Wifi/Wifi_Connection.h"
+#include "System/WriteData/SD_Write/SD_Write.h"
+#include "System/WriteData/Wifi/Wifi_Connection.h"
 class System {
 public:
 	System();
@@ -26,6 +28,8 @@ public:
 	bool timeDiff(unsigned long start, int specifiedDelay);
 	void serialToString();
 	void checkSnooze();
+	void sendHTTPost();
+	void saveSD();
 
 private:
 	SnoozeState snoozeState = SnoozeState:: RUNNING;
@@ -38,6 +42,7 @@ private:
 	int DHTDelay = 1000;
 	int PIRDelay = 600000;
 	int BuzzerDelay = 120000;
+	int sdDelay=120400;
 	void alarm();
 	void readButton();
 
@@ -48,10 +53,13 @@ private:
 
 
 	// Component objects
+	SD_Write sd;
+	Wifi_Connection wifi;
 	DHTSensor dht_;
 	PIRSensor pir;
 	Buzzer buzzer;
 	long snoozeDelay = 120000;
+	int wifiDelay = 120400;
 	bool alarmOn = false;
 	long alarmDelay = 1000;
 	unsigned long DHTLastChangeTime;

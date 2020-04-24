@@ -8,7 +8,7 @@
 #include "DHTSensor.h"
 #include <DHT.h>
 #define DHTTYPE DHT22
-const int DHTPIN = 14;
+const int DHTPIN = 33;
 DHT dht(DHTPIN, DHTTYPE);
 DHTSensor::DHTSensor() {
 	dht.begin(55);

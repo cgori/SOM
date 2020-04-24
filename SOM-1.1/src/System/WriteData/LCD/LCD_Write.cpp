@@ -10,7 +10,9 @@
 #include "Wifi.h"
 
 LCD_Write::LCD_Write(){
-    tft.init();
+  tft.init();
+  tft.fillScreen(TFT_BLACK);
+  testdrawtext("Working LCD", TFT_WHITE);
 }
 
 LCD_Write::~LCD_Write() {
@@ -18,8 +20,8 @@ LCD_Write::~LCD_Write() {
 }
 
 void LCD_Write::test() {
-  tft.fillScreen(TFT_BLACK);
-    testdrawtext("Working LCD", TFT_WHITE);
+    tft.invertDisplay(true);
+    tft.invertDisplay(false);
 }
 void LCD_Write::testdrawtext(char *text, uint16_t color) {
   tft.setCursor(0, 0);
