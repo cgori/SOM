@@ -18,6 +18,7 @@
 #include "System/WriteData/Wifi/Wifi_Connection.h"
 #include "System/WriteData/SD_Write/SD_Write.h"
 #include "System/WriteData/Wifi/Wifi_Connection.h"
+#include "System/WriteData/LCD/LCD_Write.h"
 class System {
 public:
 	System();
@@ -53,6 +54,7 @@ private:
 
 
 	// Component objects
+	LCD_Write lcdWrite;
 	SD_Write sd;
 	Wifi_Connection wifi;
 	DHTSensor dht_;

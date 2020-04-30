@@ -1,10 +1,3 @@
-/*
- * RGB.h
- *
- *  Created on: 18 Feb 2020
- *      Author: cmprharr
- */
-
 #ifndef SYSTEM_WRITEDATA_Wifi_Connection_Wifi_Connection_H_
 #define SYSTEM_WRITEDATA_Wifi_Connection_Wifi_Connection_H_
 #include "Arduino.h"
@@ -15,6 +8,7 @@ public:
     void sendData(std::vector<float>,std::vector<float>);
     long getTime();
     int getEpoch();
+    void printLocalTime();
 private:
     unsigned long wifiTime;
     int epoch;

@@ -15,6 +15,7 @@ public:
 	std::vector<float> getHeat();
 	std::vector<float> getHumidity();
 	void readDHT();
+	void wipe();
 
 private:
 	std::vector<float> heat;

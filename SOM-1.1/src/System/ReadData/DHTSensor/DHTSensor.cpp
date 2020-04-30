@@ -35,3 +35,8 @@ void DHTSensor::readDHT(){
 			this->humid.push_back(dht.readHumidity());
 		}
 }
+
+void DHTSensor::wipe(){
+	this->heat.clear();
+	this->humid.clear();
+}

@@ -68,7 +68,8 @@ void System::writeData() {
 		serialToString();
 	}
 	alarm();
-	//sendHTTPost();
+	sendHTTPost();
+	//lcdWrite.displayStatus();
 }
 
 bool System::timeDiff(unsigned long start, int specifiedDelay) {
@@ -113,6 +114,7 @@ void System::sendHTTPost() {
 void System::saveSD() {
 	if(timeDiff(sd.getTime(), this->sdDelay)){
 		wifi.sendData(dht_.getHeat(), dht_.getHumidity());
+		dht_.wipe();
 	}
 
 

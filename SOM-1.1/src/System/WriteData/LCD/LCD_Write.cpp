@@ -1,31 +1,18 @@
-/*
- * RGB.cpp
- *
- *  Created on: 18 Feb 2020
- *      Author: cmprharr
- */
-
-
 #include "LCD_Write.h"
-#include "Wifi.h"
-
+#include "LiquidCrystal_I2C.h"
+LiquidCrystal_I2C lcd(0x27, 16, 2); 
 LCD_Write::LCD_Write(){
-  tft.init();
-  tft.fillScreen(TFT_BLACK);
-  testdrawtext("Working LCD", TFT_WHITE);
+    lcd.init();                  
+    lcd.backlight();
 }
-
 LCD_Write::~LCD_Write() {
-
 }
-
-void LCD_Write::test() {
-    tft.invertDisplay(true);
-    tft.invertDisplay(false);
-}
-void LCD_Write::testdrawtext(char *text, uint16_t color) {
-  tft.setCursor(0, 0);
-  tft.setTextColor(color);
-  tft.setTextWrap(true);
-  tft.print(text);
+void LCD_Write::displayStatus(){
+  // set cursor to first column, first row
+  lcd.setCursor(0, 0);
+  // print message
+  lcd.print("Hello, World!");
+  delay(1000);
+  // clears the display to print new message
+  lcd.clear();
 }

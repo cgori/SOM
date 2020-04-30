@@ -8,18 +8,12 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-
+#include <iostream>
+#include "time.h"
 String serverName = "http://51.38.71.106/api/DHT";
 String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVlYTFhOTdlYTc2ZGEwNDUyNDg0MjVlNiIsInVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6IjA5NzliZjZjMTE3NjI2ZmJiOGJlMjFmZjY1OTBkMjIzIiwiX192IjowfSwiaWF0IjoxNTg3NjUzMTEwLCJleHAiOjE2NzQwNTMxMTB9.M--ry9qOxbbyO48p17eWa3VKjNi92qLwNXrtkYMWCqU";
 //Your Domain name with URL path or IP address with path
 
-// the following variables are unsigned longs because the time, measured in
-// milliseconds, will quickly become a bigger number than can be stored in an int.
-unsigned long lastTime = 0;
-// Timer set to 10 minutes (600000)
-//unsigned long timerDelay = 600000;
-// Set timer to 5 seconds (5000)
-unsigned long timerDelay = 5000;
 
 Wifi_Connection::Wifi_Connection(){
 }
@@ -27,19 +21,19 @@ Wifi_Connection::Wifi_Connection(){
 Wifi_Connection::~Wifi_Connection() {
 
 }
-void Wifi_Connection::sendData(std::vector<float> humidity, std::vector<float> temperature){
-
+void Wifi_Connection::sendData(std::vector<float> temperature, std::vector<float> humidity){
     if (WiFi.status() == WL_CONNECTED)
     {
       // generate document
-      StaticJsonDocument<200> doc;
+      StaticJsonDocument<1400> doc;
       JsonArray data = doc.createNestedArray("results");
       for (int i = 0; i < temperature.size(); i++)
       {
         JsonObject nested = data.createNestedObject();
-        nested["humidity"] = humidity[i];
         nested["temperature"] = temperature[i];
+        nested["humidity"] = humidity[i];
       }
+      Serial.println(data.size());
       String x;
       serializeJsonPretty(doc, x);
       // create http client
@@ -55,10 +49,6 @@ void Wifi_Connection::sendData(std::vector<float> humidity, std::vector<float> t
       {
         Serial.print("HTTP Response code: ");
         Serial.println(httpResponseCode);
-        String payload = http.getString();
-        Serial.println(payload);
-        this->epoch = payload.toInt();
-
       }
       else
       {
@@ -81,4 +71,15 @@ long Wifi_Connection::getTime(){
 
 int Wifi_Connection::getEpoch(){
   return this->epoch;
+}
+
+
+void Wifi_Connection::printLocalTime()
+{
+  struct tm timeinfo;
+  if(!getLocalTime(&timeinfo)){
+    Serial.println("Failed to obtain time");
+    return;
+  }
+  Serial.println(&timeinfo, "%A, %B %d %Y %H:%M:%S");
 }
