@@ -21,19 +21,20 @@ Wifi_Connection::Wifi_Connection(){
 Wifi_Connection::~Wifi_Connection() {
 
 }
-void Wifi_Connection::sendData(std::vector<float> temperature, std::vector<float> humidity){
+void Wifi_Connection::sendData(std::vector<float> temperature, std::vector<float> humidity, std::vector<long int> time){
     if (WiFi.status() == WL_CONNECTED)
     {
+
       // generate document
-      StaticJsonDocument<1400> doc;
+      StaticJsonDocument<2000> doc;
       JsonArray data = doc.createNestedArray("results");
       for (int i = 0; i < temperature.size(); i++)
       {
         JsonObject nested = data.createNestedObject();
+        nested["recorded"] = time[i];
         nested["temperature"] = temperature[i];
         nested["humidity"] = humidity[i];
       }
-      Serial.println(data.size());
       String x;
       serializeJsonPretty(doc, x);
       // create http client
@@ -68,11 +69,6 @@ void Wifi_Connection::sendData(std::vector<float> temperature, std::vector<float
 long Wifi_Connection::getTime(){
 	return this->wifiTime;
 }
-
-int Wifi_Connection::getEpoch(){
-  return this->epoch;
-}
-
 
 void Wifi_Connection::printLocalTime()
 {

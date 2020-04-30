@@ -16,8 +16,15 @@ public:
 	std::vector<float> getHumidity();
 	void readDHT();
 	void wipe();
+	void saveDHT();
+	float getTempHumidity();
+	float getTempHeat();
+	std::vector<long int> getTime();
 
 private:
+	float tempHeat;
+	float tempHumid;
+	std::vector<long int> time;
 	std::vector<float> heat;
 	std::vector<float> humid;
 };

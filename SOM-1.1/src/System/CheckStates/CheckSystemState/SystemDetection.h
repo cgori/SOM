@@ -14,7 +14,7 @@ class SystemDetection {
 public:
 	SystemDetection();
 	virtual ~SystemDetection();
-	void checkStates(int heat, int humid);
+	SystemState checkStates(int heat, int humid);
 	void checkHeatState(int heat);
 	void checkHumidState(int humid);
 	void turnOnRGB();

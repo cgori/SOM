@@ -31,16 +31,18 @@ public:
 	void checkSnooze();
 	void sendHTTPost();
 	void saveSD();
+	SystemState getSysState();
 
 private:
+	SystemState sysState;
 	SnoozeState snoozeState = SnoozeState:: RUNNING;
 	PresenceDetection presenceDetection;
 	SnoozeDetection snoozeDetection;
 	SystemDetection sysDetection;
-	std::vector<float> heat;
-	std::vector<float> humid;
+	float tempHeat;
+	float tempHumid;
 	// Component delays
-	int DHTDelay = 1000;
+	int DHTDelay = 5000;
 	int PIRDelay = 600000;
 	int BuzzerDelay = 120000;
 	int sdDelay=120400;
@@ -54,7 +56,7 @@ private:
 
 
 	// Component objects
-	LCD_Write lcdWrite;
+	//LCD_Write lcdWrite;
 	SD_Write sd;
 	Wifi_Connection wifi;
 	DHTSensor dht_;

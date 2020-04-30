@@ -5,13 +5,12 @@ class Wifi_Connection {
 public:
     Wifi_Connection();
 	virtual ~Wifi_Connection();
-    void sendData(std::vector<float>,std::vector<float>);
+    void sendData(std::vector<float>,std::vector<float>, std::vector<long int>);
     long getTime();
-    int getEpoch();
     void printLocalTime();
+    int concat(int, int);
 private:
     unsigned long wifiTime;
-    int epoch;
 
 };
 #endif /* SYSTEM_WRITEDATA_RGB_RGB_H_ */

@@ -18,15 +18,14 @@ System::~System() {
 void System::readSensors() {
 	if (timeDiff(this->DHTLastChangeTime, this->DHTDelay)) {
 		this->DHTLastChangeTime = millis();
+		this->dht_.saveDHT();
+	}else{
 		this->dht_.readDHT();
-		this->heat = this->dht_.getHeat();
-		this->humid = this->dht_.getHumidity();
 	}
 
 }
 void System::readButton(){
 	btn.checkButtonState();
-
 }
 
 
@@ -52,23 +51,27 @@ void System::alarm(){
 
 
 void System::checkStates() {
-	if (!this->heat.empty() && !this->humid.empty()) {
-		this->sysDetection.checkStates(this->heat.back(), this->humid.back());
-	}
+	this->sysState = sysDetection.checkStates(dht_.getTempHeat(), dht_.getTempHumidity());
 	checkPresence();
 	checkSnooze();
 
 }
 
+SystemState System::getSysState(){
+	return this->sysState;
+}
+
 void System::writeData() {
 	if (timeDiff(this->serialOutPutLastChange, this->serialOutPutDelay)) {
 		this->serialOutPutLastChange = millis();
-		this->heat = this->dht_.getHeat();
-		this->humid = this->dht_.getHumidity();
+		this->tempHeat = this->dht_.getTempHeat();
+		this->tempHumid = this->dht_.getTempHumidity();
 		serialToString();
 	}
 	alarm();
+	//saveSD();
 	sendHTTPost();
+	
 	//lcdWrite.displayStatus();
 }
 
@@ -78,9 +81,9 @@ bool System::timeDiff(unsigned long start, int specifiedDelay) {
 
 void System::serialToString() {
 	Serial.print("Current heat:");
-	Serial.print(this->heat.back());
+	Serial.print(this->tempHeat);
 	Serial.print(" Current Humidity:");
-	Serial.println(this->humid.back());
+	Serial.println(this->tempHumid);
 }
 
 // PIRSensor
@@ -105,7 +108,8 @@ void System::checkPresence() {
 
 void System::sendHTTPost() {
 	if(timeDiff(wifi.getTime(), this->wifiDelay)){
-		wifi.sendData(dht_.getHeat(), dht_.getHumidity());
+		wifi.sendData(dht_.getHeat(), dht_.getHumidity(), dht_.getTime());
+		dht_.wipe();
 	}
 
 
@@ -113,8 +117,6 @@ void System::sendHTTPost() {
 
 void System::saveSD() {
 	if(timeDiff(sd.getTime(), this->sdDelay)){
-		wifi.sendData(dht_.getHeat(), dht_.getHumidity());
-		dht_.wipe();
 	}
 
 

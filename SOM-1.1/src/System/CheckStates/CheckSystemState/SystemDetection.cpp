@@ -16,7 +16,7 @@ SystemDetection::~SystemDetection() {
 	// TODO Auto-generated destructor stub
 }
 
-void SystemDetection::checkStates(int heat, int humid) {
+SystemState SystemDetection::checkStates(int heat, int humid) {
 
 	SystemState TempState = this->sysState;
 	checkHeatState(heat);
@@ -45,6 +45,7 @@ void SystemDetection::checkStates(int heat, int humid) {
 			this->rgb.turnGreenLEDOn();
 		}
 	}
+	return this->sysState;
 }
 
 void SystemDetection::checkHeatState(int heat) {
