@@ -71,8 +71,8 @@ void System::writeData() {
 	alarm();
 	//saveSD();
 	sendHTTPost();
-	
-	//lcdWrite.displayStatus();
+	lcdWrite.setup();
+	lcdWrite.writeData(sysState);
 }
 
 bool System::timeDiff(unsigned long start, int specifiedDelay) {
@@ -107,6 +107,7 @@ void System::checkPresence() {
 }
 
 void System::sendHTTPost() {
+	wifi.setup();
 	if(timeDiff(wifi.getTime(), this->wifiDelay)){
 		wifi.sendData(dht_.getHeat(), dht_.getHumidity(), dht_.getTime());
 		dht_.wipe();
