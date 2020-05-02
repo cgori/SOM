@@ -45,7 +45,7 @@ private:
 	int DHTDelay = 5000;
 	int PIRDelay = 600000;
 	int BuzzerDelay = 120000;
-	int sdDelay=120400;
+	int sdDelay=120100;
 	void alarm();
 	void readButton();
 
@@ -67,6 +67,7 @@ private:
 	bool alarmOn = false;
 	long alarmDelay = 1000;
 	unsigned long DHTLastChangeTime;
+	unsigned long SDLastChangeTime;
 	long criticalDelay = 5000;
 	const long amberDelay = 30000;
 	unsigned long lastChangeSystem;

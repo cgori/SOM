@@ -69,7 +69,7 @@ void System::writeData() {
 		serialToString();
 	}
 	alarm();
-	//saveSD();
+	saveSD();
 	sendHTTPost();
 	lcdWrite.setup();
 	lcdWrite.writeData(sysState);
@@ -117,7 +117,11 @@ void System::sendHTTPost() {
 }
 
 void System::saveSD() {
-	if(timeDiff(sd.getTime(), this->sdDelay)){
+	sd.setup();
+	if(timeDiff(this->SDLastChangeTime, this->sdDelay)){
+		this->SDLastChangeTime = millis();
+		sd.writeFile(dht_.getHeat(), dht_.getHumidity(), dht_.getTime());
+		sd.readFile();
 	}
 
 
