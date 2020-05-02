@@ -54,6 +54,7 @@ void System::checkStates() {
 	this->sysState = sysDetection.checkStates(dht_.getTempHeat(), dht_.getTempHumidity());
 	checkPresence();
 	checkSnooze();
+	btn.check();
 
 }
 
@@ -62,6 +63,7 @@ SystemState System::getSysState(){
 }
 
 void System::writeData() {
+	this->serialOutPutDelay = btn.getSerialTime();
 	if (timeDiff(this->serialOutPutLastChange, this->serialOutPutDelay)) {
 		this->serialOutPutLastChange = millis();
 		this->tempHeat = this->dht_.getTempHeat();

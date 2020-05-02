@@ -74,7 +74,7 @@ private:
 	unsigned buzzerDelay = 1000;
 
 	unsigned long serialOutPutLastChange;
-	const int serialOutPutDelay = 5000;
+	int serialOutPutDelay = 5000;
 	void checkPresence();
 };
 
